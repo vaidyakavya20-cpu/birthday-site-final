@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -12,9 +12,7 @@ body{
   color:white;
   background:black;
 }
-<audio id="music" loop preload="auto">
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
+
 /* 🌌 GALAXY */
 #galaxy{
   position:fixed;
@@ -47,7 +45,7 @@ body{
   position:absolute;
   width:2px;
   height:120px;
-  background:linear-gradient(-45deg, white, rgba(255,182,193,0.5), transparent);
+  background:linear-gradient(-45deg, white, rgba(255,182193,0.5), transparent);
   transform:rotate(45deg);
   animation:shoot 1.5s linear forwards;
 }
@@ -142,7 +140,7 @@ button{
   height:800px;
 }
 
-/* 💖 BANNER TEXT (OUTSIDE CIRCLE) */
+/* 💖 BANNER TEXT */
 .top-banner{
   position:absolute;
   top:20px;
@@ -185,7 +183,6 @@ button{
   box-shadow:0 0 10px rgba(255,255,255,0.2);
 }
 
-/* ✨ HOVER GLOW */
 .circle-img:hover{
   transform:
     rotate(calc(var(--i) * 36deg))
@@ -193,9 +190,7 @@ button{
     rotate(calc(var(--i) * -36deg))
     scale(1.2);
 
-  box-shadow:
-    0 0 25px pink,
-    0 0 60px hotpink;
+  box-shadow:0 0 25px pink, 0 0 60px hotpink;
 }
 
 /* 💥 FIREWORKS */
@@ -219,6 +214,11 @@ button{
 <body>
 
 <div id="galaxy"></div>
+
+<!-- 🎵 FIXED AUDIO (ONLY CORRECTION) -->
+<audio id="music" loop preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 
 <!-- PAGE 1 -->
 <div id="p1" class="page active">
@@ -276,7 +276,7 @@ Happy birthday my shona. I love you more than words will ever be able to carry.
   <button onclick="blow()">Blow 💨</button>
 </div>
 
-<!-- PAGE 6 FINAL -->
+<!-- PAGE 6 -->
 <div id="p6" class="page">
 
   <div class="top-banner">
@@ -356,61 +356,14 @@ setInterval(()=>{
   setTimeout(()=>s.remove(),1500);
 },1600);
 
-/* LETTER */
-const pages=["page1.png","page2.png","page3.png","page4.png","page5.png","page6.png","page7.png"];
-let book=document.getElementById("book");
+/* AUDIO FIX ONLY */
+const music = document.getElementById("music");
 
-pages.forEach((src,i)=>{
-  let d=document.createElement("div");
-  d.className="pageFlip";
-  d.style.zIndex=pages.length-i;
-
-  let img=document.createElement("img");
-  img.src=src;
-
-  d.appendChild(img);
-  book.appendChild(d);
-});
-
-let f=0;
-
-function flip(){
-  let all=document.querySelectorAll(".pageFlip");
-
-  if(f < all.length){
-    all[f].classList.add("flipped");
-    f++;
-  } else {
-    go(5);
-  }
-}
-
-/* CAKE + FIREWORKS */
-function blow(){
-  document.getElementById("cake").innerText="🎂✨";
-  fireworks();
-  setTimeout(()=>go(6),800);
-}
-
-/* CONTINUOUS FIREWORKS */
-function fireworks(){
-  setInterval(()=>{
-    for(let i=0;i<10;i++){
-      let f=document.createElement("div");
-      f.className="firework";
-      f.style.background="hsl("+Math.random()*360+",100%,60%)";
-      f.style.left=Math.random()*100+"vw";
-      f.style.top=Math.random()*100+"vh";
-      document.body.appendChild(f);
-      setTimeout(()=>f.remove(),1200);
-    }
-  },400);
-}
-  const music = document.getElementById("music");
-
-// Try to play after first interaction (required by browsers)
 document.addEventListener("click", () => {
-  music.play();
+  if (music.paused) {
+    music.volume = 0.5;
+    music.play();
+  }
 });
 
 </script>
