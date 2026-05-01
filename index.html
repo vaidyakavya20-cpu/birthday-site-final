@@ -265,7 +265,9 @@ Happy birthday my shona. I love you more than words will ever be able to carry.
 <!-- PAGE 4 -->
 <div id="p4" class="page">
   <h2>My Letter 💌</h2>
+
   <div class="book" id="book"></div>
+
   <button onclick="flip()">Next ➜</button>
 </div>
 
@@ -365,6 +367,43 @@ document.addEventListener("click", () => {
     music.play();
   }
 });
+  /* 📖 FLIPBOOK CREATION */
+const pages = [
+  "page1.png",
+  "page2.png",
+  "page3.png",
+  "page4.png",
+  "page5.png",
+  "page6.png",
+  "page7.png"
+];
+
+let book = document.getElementById("book");
+
+pages.forEach((src, i) => {
+  let page = document.createElement("div");
+  page.className = "pageFlip";
+  page.style.zIndex = pages.length - i;
+
+  let img = document.createElement("img");
+  img.src = src;
+
+  page.appendChild(img);
+  book.appendChild(page);
+});
+
+let f = 0;
+
+function flip(){
+  let all = document.querySelectorAll(".pageFlip");
+
+  if(f < all.length){
+    all[f].classList.add("flipped");
+    f++;
+  } else {
+    go(5); // go to cake page
+  }
+}
 
 </script>
 
