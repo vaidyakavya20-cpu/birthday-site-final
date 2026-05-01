@@ -404,6 +404,33 @@ function flip(){
     go(5); // go to cake page
   }
 }
+  function blow(){
+  document.getElementById("cake").innerText = "🎂💨✨";
+  startFireworks();
+
+  setTimeout(()=>{
+    go(6);
+  }, 1200);
+}
+
+function startFireworks(){
+  let interval = setInterval(()=>{
+    for(let i=0;i<10;i++){
+      let f = document.createElement("div");
+      f.className = "firework";
+
+      f.style.background = "hsl(" + Math.random()*360 + ",100%,60%)";
+      f.style.left = Math.random()*100 + "vw";
+      f.style.top = Math.random()*100 + "vh";
+
+      document.body.appendChild(f);
+
+      setTimeout(()=>f.remove(), 1200);
+    }
+  }, 300);
+
+  setTimeout(()=>clearInterval(interval), 5000);
+}
 
 </script>
 
